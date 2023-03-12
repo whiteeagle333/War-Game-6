@@ -1,0 +1,63 @@
+<!-- 
+<!DOCTYPE html>
+  <html>
+    <head>
+      <link rel="stylesheet" href="node_modules/mocha/mocha.css" />
+    </head>
+    <body>
+      <div id="mocha">
+        <p><a href=".">indextest</a></p>
+      </div>
+      <div id="should throw an error if number of players is not 2"></div>
+      <div id="fixtures"></div>
+      <script src="node_modules/mocha/mocha.js"></script>
+      <script src="node_modules/chai/chai.js"></script>
+      <script src="indextest.js"></script>
+      <script>
+        mocha.setup("bbd");
+      </script>
+      <script src="indextest.js"></script>
+      <script>
+        mocha.run();
+      </script>
+    </body>
+  </html>
+</html> -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Mocha Test Results</title>
+    <link rel="stylesheet" href="https://unpkg.com/mocha@9.2.0/mocha.css" />
+  </head>
+  <body>
+    <div id="mocha"></div>
+    <script src="https://unpkg.com/mocha@9.2.0/mocha.js"></script>
+    <script src="https://unpkg.com/chai@4.3.4/chai.js"></script>
+    <script src="./newmain2.js"></script>
+    <script>
+      mocha.setup("bdd");
+
+      describe("Game", function () {
+        describe("dealCards()", function () {
+          it("should deal 26 cards to each player", function () {
+            const game = new Game("Player 1", "Player 2");
+            game.dealCards();
+
+            chai.expect(game.player1.cards.length).to.equal(26);
+            chai.expect(game.player2.cards.length).to.equal(26);
+          });
+
+          it("should throw an error if number of players is not 2", function () {
+            chai.expect(() => new Game("Player 1")).to.throw(Error);
+            chai
+              .expect(() => new Game("Player 1", "Player 2", "Player 3"))
+              .to.throw(Error);
+          });
+        });
+      });
+
+      mocha.run();
+    </script>
+  </body>
+</html>
